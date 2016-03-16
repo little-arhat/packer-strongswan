@@ -38,5 +38,3 @@ called to create user <USERNAME>. Script will request password and will generate
 password was supplied.
 
 # Caveats
-
-ami-b9a108d2 is built with wrong `rc.local` and will not start `strongswan` on startup.
