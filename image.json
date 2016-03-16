@@ -1,0 +1,52 @@
+{
+    "variables": {
+        "aws_access_key": "",
+        "aws_secret_key": ""
+    },
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "access_key": "{{ user `aws_access_key` }}",
+            "secret_key": "{{ user `aws_secret_key` }}",
+            "region": "us-east-1",
+            "source_ami": "ami-678b260c",
+            "instance_type": "t1.micro",
+            "ssh_username": "ubuntu",
+            "ami_name": "StrongSwan-{{ timestamp }}",
+            "tags": {
+                "Generation": "v2",
+                "OS": "Ubuntu Trusty 14.04.3 LTS"
+            }
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": "sleep 10"
+        },
+        {
+            "type": "file",
+            "source": "./files/charon.conf",
+            "destination": "/tmp/charon.conf"
+        },
+        {
+            "type": "file",
+            "source": "./files/setup-ipsec.sh",
+            "destination": "/home/ubuntu/setup-ipsec.sh"
+        },
+        {
+            "type": "file",
+            "source": "./files/add-ipsec-user.sh",
+            "destination": "/home/ubuntu/add-ipsec-user.sh"
+        },
+        {
+            "type": "file",
+            "source": "./files/rc.local",
+            "destination": "/tmp/rc.local"
+        },
+        {
+            "type": "shell",
+            "script": "./scripts/setup.sh"
+        }
+    ]
+}
