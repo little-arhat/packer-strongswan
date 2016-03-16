@@ -8,8 +8,6 @@ Necessary tcp/ip options are also made.
 
 source id: ami-678b260c -- Ubuntu 14.04.3 LTS (Trusty Tahr)
 
-last built image: ami-b9a108d2
-
 # Instance setup
 
 Instance for VPN server should be created in public subnet of target VPC and should either have public ip
